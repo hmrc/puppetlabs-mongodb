@@ -486,6 +486,10 @@ Default: <>
 #####`ssl_ca`
 Default: <>
 
+#####`ssl_mode`
+Ssl authorization mode. Valid options are: requireSSL, preferSSL, allowSSL.
+Default: requireSSL
+
 #####`service_manage`
 Whether or not the MongoDB service resource should be part of the catalog.
 Default: true
