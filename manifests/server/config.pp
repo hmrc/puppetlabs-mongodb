@@ -211,14 +211,16 @@ class mongodb::server::config {
     }
 
     file { $dbpath:
-      ensure   => directory,
-      mode     => '0755',
-      owner    => $user,
-      group    => $group,
-      recurse  => true,
-      purge    => false,
-      checksum => 'none',
-      require  => File[$config],
+      ensure  => directory,
+      mode    => '0755',
+      owner   => $user,
+      group   => $group,
+      require => File[$config],
+    } ~>
+    exec { 'fix dbpath permissions':
+      command     => "chown -R ${user}:${group} ${dbpath}",
+      path        => ['/usr/bin', '/bin'],
+      refreshonly => true,
     }
 
     if $pidfilepath {
